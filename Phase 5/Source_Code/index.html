@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>FitBuddy | AI Fitness Planner</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', path='css/style.css') }}"
+    >
+
+</head>
+
+
+<body class="landing">
+
+
+<main class="container">
+
+
+    <section class="hero">
+
+        <div class="badge">
+            AI FITNESS PLANNER
+        </div>
+
+        <h1>
+            FitBuddy
+        </h1>
+
+        <p class="lead">
+
+            Create a personalized 7-day
+            workout plan and practical
+            nutrition or recovery tips.
+
+        </p>
+
+    </section>
+
+
+    <section class="card form-card">
+
+        <h2>
+            Tell us about you
+        </h2>
+
+
+        <form
+            action="/generate-workout"
+            method="post"
+        >
+
+
+            <div class="grid two">
+
+
+                <label>
+
+                    Name
+
+                    <input
+                        name="username"
+                        type="text"
+                        placeholder="Your name"
+                        required
+                        maxlength="120"
+                    >
+
+                </label>
+
+
+                <label>
+
+                    User ID
+
+                    <input
+                        name="user_id"
+                        type="text"
+                        placeholder="e.g. FB001"
+                        required
+                        maxlength="64"
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Age
+
+                    <input
+                        name="age"
+                        type="number"
+                        min="13"
+                        max="100"
+                        required
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Weight (kg)
+
+                    <input
+                        name="weight"
+                        type="number"
+                        min="20"
+                        max="400"
+                        step="0.1"
+                        required
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Fitness goal
+
+                    <select
+                        name="goal"
+                        required
+                    >
+
+                        <option value="weight loss">
+                            Weight loss
+                        </option>
+
+                        <option value="muscle gain">
+                            Muscle gain
+                        </option>
+
+                        <option value="general wellness">
+                            General wellness
+                        </option>
+
+                        <option value="flexibility">
+                            Flexibility
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+                <label>
+
+                    Workout intensity
+
+                    <select
+                        name="intensity"
+                        required
+                    >
+
+                        <option value="low">
+                            Low
+                        </option>
+
+                        <option
+                            value="medium"
+                            selected
+                        >
+                            Medium
+                        </option>
+
+                        <option value="high">
+                            High
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+            </div>
+
+
+            <button
+                class="button primary"
+                type="submit"
+            >
+
+                Generate My Plan →
+
+            </button>
+
+
+        </form>
+
+
+        <p class="small">
+
+            General wellness information only.
+            This is not a substitute for advice
+            from a qualified healthcare or fitness
+            professional.
+
+        </p>
+
+
+    </section>
+
+
+    <nav class="links">
+
+        <a href="/view-all-users">
+            Admin / Coach Dashboard
+        </a>
+
+        <a href="/docs">
+            API Docs
+        </a>
+
+    </nav>
+
+
+</main>
+
+
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FitBuddy | Users
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', path='css/style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<main class="container wide">
+
+
+    <header class="topbar">
+
+
+        <a
+            class="brand"
+            href="/"
+        >
+            FitBuddy
+        </a>
+
+
+        <a href="/">
+            New Plan
+        </a>
+
+
+    </header>
+
+
+    <section class="hero compact">
+
+
+        <div class="badge">
+            ADMIN / COACH VIEW
+        </div>
+
+
+        <h1>
+            All Users & Plans
+        </h1>
+
+
+        <p class="lead">
+
+            Review saved profiles and compare
+            original and updated plans.
+
+        </p>
+
+
+    </section>
+
+
+    {% if not users %}
+
+        <section class="card">
+
+            <p>
+                No users have been created yet.
+            </p>
+
+        </section>
+
+    {% endif %}
+
+
+    {% for user in users %}
+
+
+        <section class="card user-card">
+
+
+            <div class="section-heading">
+
+
+                <div>
+
+                    <h2>
+
+                        {{ user.username }}
+
+                        <span class="muted">
+
+                            ({{ user.user_id }})
+
+                        </span>
+
+                    </h2>
+
+
+                    <p>
+
+                        {{ user.age }} years
+
+                        ·
+
+                        {{ user.weight }} kg
+
+                        ·
+
+                        {{ user.goal.title() }}
+
+                        ·
+
+                        {{ user.intensity.title() }}
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            {% for plan in user.plans %}
+
+
+                <div class="plan-grid">
+
+
+                    <div>
+
+                        <h3>
+                            Original Plan
+                        </h3>
+
+
+                        <pre class="plan small-plan">
+
+{{ plan.original_plan }}
+
+                        </pre>
+
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Updated Plan
+                        </h3>
+
+
+                        {% if plan.updated_plan %}
+
+
+                            <pre class="plan small-plan">
+
+{{ plan.updated_plan }}
+
+                            </pre>
+
+
+                        {% else %}
+
+
+                            <div class="empty">
+
+                                No feedback update yet.
+
+                            </div>
+
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+        </section>
+
+
+    {% endfor %}
+
+
+</main>
+
+
+</body>
+
+</html>

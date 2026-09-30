@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FitBuddy | Your Plan
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', path='css/style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<main class="container">
+
+
+    <header class="topbar">
+
+        <a
+            class="brand"
+            href="/"
+        >
+            FitBuddy
+        </a>
+
+        <a href="/view-all-users">
+            Dashboard
+        </a>
+
+    </header>
+
+
+    <section class="card profile">
+
+
+        <div>
+
+            <div class="badge">
+                PERSONALIZED PLAN
+            </div>
+
+            <h1>
+                {{ user.username }}
+            </h1>
+
+            <p>
+
+                User ID:
+
+                <strong>
+                    {{ user.user_id }}
+                </strong>
+
+            </p>
+
+        </div>
+
+
+        <div class="stats">
+
+
+            <span>
+
+                <b>
+                    {{ user.age }}
+                </b>
+
+                age
+
+            </span>
+
+
+            <span>
+
+                <b>
+                    {{ user.weight }}
+                </b>
+
+                kg
+
+            </span>
+
+
+            <span>
+
+                <b>
+                    {{ user.goal.title() }}
+                </b>
+
+                goal
+
+            </span>
+
+
+            <span>
+
+                <b>
+                    {{ user.intensity.title() }}
+                </b>
+
+                intensity
+
+            </span>
+
+
+        </div>
+
+
+    </section>
+
+
+    {% if is_updated %}
+
+    <div class="notice success">
+
+        Your feedback was applied
+        and the workout plan was updated.
+
+    </div>
+
+    {% endif %}
+
+
+    <section class="card">
+
+
+        <div class="section-heading">
+
+
+            <h2>
+
+                {% if is_updated %}
+
+                    Updated 7-Day Workout Plan
+
+                {% else %}
+
+                    7-Day Workout Plan
+
+                {% endif %}
+
+            </h2>
+
+
+            <span class="pill">
+
+                {{ user.goal.title() }}
+
+            </span>
+
+
+        </div>
+
+
+        <pre class="plan">
+
+{{ current_plan }}
+
+        </pre>
+
+
+    </section>
+
+
+    <section class="card tip">
+
+        <h2>
+            Nutrition / Recovery Tip
+        </h2>
+
+        <p>
+            {{ plan.nutrition_tip }}
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+
+        <h2>
+            Refine your plan
+        </h2>
+
+
+        <p class="muted">
+
+            Examples:
+
+            "Add more cardio",
+
+            "Make Day 4 lighter",
+
+            or
+
+            "Include another rest day."
+
+        </p>
+
+
+        <form
+            action="/submit-feedback"
+            method="post"
+        >
+
+
+            <input
+                type="hidden"
+                name="user_id"
+                value="{{ user.user_id }}"
+            >
+
+
+            <textarea
+                name="feedback"
+                rows="5"
+                placeholder="What would you like to change?"
+                required
+                maxlength="2000"
+            ></textarea>
+
+
+            <button
+                class="button primary"
+                type="submit"
+            >
+
+                Update Plan with AI →
+
+            </button>
+
+
+        </form>
+
+
+    </section>
+
+
+    <div class="actions">
+
+
+        <a
+            class="button secondary"
+            href="/"
+        >
+            Create Another Plan
+        </a>
+
+
+        <a
+            class="button secondary"
+            href="/view-all-users"
+        >
+            View Users
+        </a>
+
+
+    </div>
+
+
+</main>
+
+
+</body>
+
+</html>
